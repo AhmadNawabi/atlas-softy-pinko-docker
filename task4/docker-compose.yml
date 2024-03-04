@@ -1,0 +1,22 @@
+version: '3 or 4 (0 index?)'  # Docker Compose file version (3 or 4, 0-indexed).
+
+services:  # Define services (containers) for the application.
+
+  back-end:  # Define a service named "back-end".
+    build:  # Specify the build configuration for the Docker image.
+      context: ./back-end  # Set the build context to the "back-end" directory.
+      dockerfile: Dockerfile   # Specify the name of the Dockerfile.
+    image: softy-pinko-back-end:task4  # Set the name and tag for the Docker image.
+    ports:   # Specify port mappings for the service.
+      - "5252:5252"    # Map port 5252 on the host to port 5252 in the container.
+
+
+  front-end:   # Define a service named "front-end".
+    build:  # Specify the build configuration for the Docker image.
+      context: ./front-end   # Set the build context to the "front-end" directory.
+      dockerfile: Dockerfile   # Specify the name of the Dockerfile.
+    image: softy-pinko-front-end:task4   # Set the name and tag for the Docker image.
+    ports:    # Specify port mappings for the service.
+      - "9000:9000"   # Map port 9000 on the host to port 9000 in the container.
+    depends_on:   # Specify dependencies between services.
+      - back-end   # Indicate that "front-end" depends on "back-end".
